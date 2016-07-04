@@ -84,7 +84,7 @@ Public Class frmCompare
 
             For y As Integer = 0 To 15
                 For x As Integer = 0 To 15
-                    grayScale(x, y) = Math.Abs(thisOne.GetPixel(x, y).R)
+                    grayScale(x, y) = thisOne.GetPixel(x, y).R * 0.299 + thisOne.GetPixel(x, y).G * 0.587 + thisOne.GetPixel(x, y).B * 0.144
                 Next
             Next
             Return grayScale
@@ -144,7 +144,7 @@ Public Class frmCompare
 
         Dim diff As Double = PercentageDifference(bm1, bm2)
         Label3.Text = (diff * 100).ToString
-        If diff < 0.1 Then
+        If diff <= 0.25 Then
             Label2.Text = "The images are identical."
         Else
             Label2.Text = "The images are different."
